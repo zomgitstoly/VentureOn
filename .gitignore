@@ -1,0 +1,7 @@
+venv/
+tmp/
+app.db
+venu.sublime-project
+venu.sublime-workspace
+*.pyc
+.DS_Store
