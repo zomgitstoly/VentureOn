@@ -64,6 +64,7 @@ class Post(db.Model):
   @staticmethod  
   def downvote(pid):
     post = Post.query.filter_by(id = pid).first()
-    post.vote -= 1
+    if post.vote > 0:
+      post.vote -= 1
     db.session.add(post)
     db.session.commit()

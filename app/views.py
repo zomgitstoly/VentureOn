@@ -10,7 +10,7 @@ from datetime import datetime
 @app.route('/index', methods = ['GET', 'POST'])
 def index():
   user = g.user
-  posts = Post.query.all()
+  posts = Post.query.order_by(Post.vote.desc())
   return render_template("index.html",
     title = 'Home',
     user = user,
@@ -99,7 +99,10 @@ def edit():
 def vote():
   direction = request.form['direction']
   postId = request.form['postId']
-  Post.upvote(int(postId))
+  if (direction == 'up'):
+    Post.upvote(int(postId))
+  elif (direction == 'down'):
+    Post.downvote(int(postId))
   return "True"
 
 @app.before_request
