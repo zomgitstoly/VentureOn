@@ -50,7 +50,20 @@ class Post(db.Model):
   body = db.Column(db.String(140))
   timestamp = db.Column(db.DateTime)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
+  vote = db.Column(db.Integer, default = 1)
 
   def __repr__(self):
     return '<Post %r>' % (self.body)
+  @staticmethod
+  def upvote(pid):
+    post = Post.query.filter_by(id = pid).first()
+    post.vote += 1
+    db.session.add(post)
+    db.session.commit()
+
+  @staticmethod  
+  def downvote(pid):
+    post = Post.query.filter_by(id = pid).first()
+    post.vote -= 1
+    db.session.add(post)
+    db.session.commit()

@@ -6,8 +6,8 @@ from models import User, ROLE_USER, ROLE_ADMIN, Post
 from datetime import datetime
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods = ['GET', 'POST'])
+@app.route('/index', methods = ['GET', 'POST'])
 def index():
   user = g.user
   posts = Post.query.all()
@@ -93,6 +93,14 @@ def edit():
     form.lastname.data = g.user.lastname
   return render_template('edit.html',
     form = form)  
+
+@app.route('/vote', methods = ['POST'])
+@login_required
+def vote():
+  direction = request.form['direction']
+  postId = request.form['postId']
+  Post.upvote(int(postId))
+  return "True"
 
 @app.before_request
 def before_request():
