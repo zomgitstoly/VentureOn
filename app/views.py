@@ -99,11 +99,12 @@ def edit():
 def vote():
   direction = request.form['direction']
   postId = request.form['postId']
+  newVote = 0
   if (direction == 'up'):
-    Post.upvote(int(postId))
+    newVote = Post.upvote(int(postId))
   elif (direction == 'down'):
-    Post.downvote(int(postId))
-  return "True"
+    newVote = Post.downvote(int(postId))
+  return str(newVote)
 
 @app.before_request
 def before_request():

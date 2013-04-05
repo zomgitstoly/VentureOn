@@ -60,6 +60,7 @@ class Post(db.Model):
     post.vote += 1
     db.session.add(post)
     db.session.commit()
+    return post.vote
 
   @staticmethod  
   def downvote(pid):
@@ -68,3 +69,4 @@ class Post(db.Model):
       post.vote -= 1
     db.session.add(post)
     db.session.commit()
+    return post.vote
