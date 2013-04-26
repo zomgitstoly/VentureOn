@@ -1,15 +1,6 @@
-function vote(direction, postId, curVote){
+function vote(direction, postId){
   console.log("pressed")
   console.log(direction, postId)
- /* vote = parseInt(curVote, 10)
-  if(direction == "up"){
-    vote += 1
-    $("vote" + postId).text(vote)
-  }
-  else if(direction == "down"){
-    vote -= 1
-    $("vote" + postId).text(vote)
-  }*/
   $.post('/vote',{
     direction : direction,
     postId : postId
@@ -19,4 +10,14 @@ function vote(direction, postId, curVote){
     console.log("vote failed")
   });
 }
+
+$(document).ready(function() {
+
+var editor = new wysihtml5.Editor("textarea", { // id of textarea element
+  toolbar:      "toolbar", // id of toolbar element
+  parserRules:  wysihtml5ParserRules // defined in parser rules set 
+});
+
+
+});
 

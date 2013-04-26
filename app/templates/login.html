@@ -10,23 +10,41 @@ function set_openid(url, pr){
 	}
 	form = document.forms['login'];
 	form.elements['openid'].value = url;
+	document.getElementById("Sign In").click();
 }
 </script>
-
-<h1>Sign In</h1>
+{% include 'flash.html' %}
+<div class = "well">
+<h3>Please Sign In</h3>
 <form action="" method="post" name="login"> 
 	{{form.hidden_tag()}}
-	<p>
-		Please enter your OpenID:<br>
-		{{form.openid(size=80)}}
-		{% for error in form.errors.openid %}
-		<span style="color: red;">[{{error}}]</span>
-		{% endfor %}<br>
-		| {% for pr in providers %}
-			<a href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');">{{pr.name}}</a> |
+	<div class = "help-block">Chose an OpenID Provider From Below: </div>
+		<div class = "control-group">
+			{% for pr in providers %}
+			<a href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');"><img src="/static/img/{{pr.name}}.png"></a>
 			{% endfor %}
-	</p>
-	<p>{{form.remember_me}} Remember Me </p>
-	<p><input type="submit" value = "Sign In"></p>	
+		</div>
+		<div class="control-group{% if form.errors.openid %} error{% endif %}">
+      <label class="control-label" for="openid">Or enter your OpenID here:</label>
+        <div class="controls">
+          {{ form.openid(size = 80, class = "span4") }}
+            {% for error in form.errors.openid %}
+             <span class="help-inline">[{{error}}]</span><br>
+            {% endfor %}
+        </div>
+    </div>
+   	<div class = "control-group">
+   		<div class = "controls">
+   			<label class= "checkbox" for = "remeber_me">
+   				{{form.remember_me}} Remember Me 
+   			</label>
+   		</div>
+   	</div>
+   	<div class = "control-group">
+   		<div class = "controls">
+   			<input class="btn btn-primary" type="submit" value="Sign In" id = "Sign In">
+   		</div>
+   	</div>
 </form>
+</div>
 {% endblock %}

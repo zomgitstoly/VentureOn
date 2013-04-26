@@ -5,9 +5,9 @@
 {% else%}
 <h1>Hi, {{user.nickname}}!</h1>
 {% endif %}
-<table class="table">
+<hr>
+{% include 'flash.html' %}
 {% for post in posts %}
     {% include 'post.html' %}
 {% endfor %}
-</table>
 {% endblock %}

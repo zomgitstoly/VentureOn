@@ -1,10 +1,14 @@
-from flask import render_template, flash, redirect, session, url_for, request, g
+from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from forms import LoginForm, EditForm
 from app import app, db, lm, oid
 from models import User, ROLE_USER, ROLE_ADMIN, Post
 from datetime import datetime
-
+import os
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/', methods = ['GET', 'POST'])
 @app.route('/index', methods = ['GET', 'POST'])
@@ -105,6 +109,10 @@ def vote():
   elif (direction == 'down'):
     newVote = Post.downvote(int(postId))
   return str(newVote)
+
+@app.route('/newVenture', methods = ['GET','POST'])
+def newVenture():
+  return render_template("newVenture.html")
 
 @app.before_request
 def before_request():

@@ -4,4 +4,5 @@ app.db
 venu.sublime-project
 venu.sublime-workspace
 *.pyc
+*.ico
 .DS_Store
