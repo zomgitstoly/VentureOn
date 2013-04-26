@@ -1,8 +1,9 @@
 <script src="/static/js/simple.js"></script>
 <script src="/static/js/wysihtml5-0.3.0.js"></script>
-
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-tagmanager.css">
 {% extends "base.html" %}
 {% block content %}
+<script src="/static/js/bootstrap-tagmanager.js"></script>
 <h2>New Venture</h2>
 <hr>
 <style>  
@@ -17,7 +18,7 @@
     padding: 5px;
   }
   
-  textarea {
+  #textarea{
     height: 280px;
     border: 2px solid black;
     box-sizing: boder-box;
@@ -27,19 +28,33 @@
     font-size: 12px;
   }
   
+  #title{
+    resize: none;
+  }
   textarea:focus {
     color: black;
     border: 2px solid black;
   }
 </style>
+ 
 <form>
-  <div id="toolbar" style="display: none;">
+    <h4> Title: </h4>
+    <textarea id = "title" placeholder = "Enter the name of the venture ..." rows = "1"> </textarea>
+  <div id="toolbar">
     <a data-wysihtml5-command="bold" title="CTRL+B"><b>B</b></a> |
     <a data-wysihtml5-command="italic" title="CTRL+I"><i>I</i></a>
-    <a class = "btn btn-info" data-wysihtml5-action="change_view">Switch To HTML View</a>
+    <a class = "btn btn-small" data-wysihtml5-action="change_view">Switch To HTML View</a>
   </div>
-  <textarea id="textarea" placeholder="Enter text ..." row = "100"></textarea>
+  <textarea id="textarea" placeholder="Enter text ..." row  = "5" col = "5"></textarea>
   <div class = "control-group">
+    <div class = "controls">
+      
+    </div>
+  </div>
+  <div class = "control-group">
+    <div class = "controls">
+      <input type="text" name="tags" placeholder="Tags" class="tagManager"/>
+    </div>
     <div class = "controls">
       <input class="btn btn-primary" type="submit" value="Submit Venture" id = "submitNewVenture">
     </div>

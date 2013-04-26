@@ -25,3 +25,6 @@ class EditForm(Form):
             self.nickname.errors.append('This nickname is already in use. Please choose another one.')
             return False
         return True
+
+class Venture(Form):
+    

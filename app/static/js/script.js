@@ -18,6 +18,12 @@ var editor = new wysihtml5.Editor("textarea", { // id of textarea element
   parserRules:  wysihtml5ParserRules // defined in parser rules set 
 });
 
+$(".tagManager").tagsManager({
+  preventSubmitOnEnter: true,
+  maxTags: 4,
+  blinkBGColor_1: '#FFFF9C',
+  blinkBGColor_2: '#CDE69C'
+});
 
 });
 
