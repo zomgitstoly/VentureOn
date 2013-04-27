@@ -12,7 +12,8 @@ function vote(direction, postId){
 }
 
 $(document).ready(function() {
-
+var maxPostSize = 500;
+var currentPostSize = 0;
 // var editor = new wysihtml5.Editor("textarea", { // id of textarea element
 //   toolbar:      "toolbar", // id of toolbar element
 //   parserRules:  wysihtml5ParserRules // defined in parser rules set 
@@ -36,12 +37,23 @@ $(".tagManager").tagsManager({
 
 var wysihtml5Editor = $('.textarea').data("wysihtml5").editor;
 wysihtml5Editor.on("load", function() {
-  var $doc = $(wysihtml5Editor.composer.doc);
-  $doc.keypress(function(evt){
-    console.log(evt.key + " hey!")
-    var size = $(".textarea").val().length
-    console.log(size)
-    $("#numChar").text(500 - (size + 1) + " characters left ")
+  var doc = $(wysihtml5Editor.composer.doc);
+  var post;
+  doc.keyup(function(evt){
+    
+    console.log(evt.key + " hey!");
+    post = $(".textarea").val();
+    var newSize = 0;
+    if(evt.which == 32){
+      currentPostSize = currentPostSize + 1; 
+    }
+    else {
+      currentPostSize = post.length + 1
+    }
+    console.log(post.length);
+    console.log(post);
+    $("#numChar").text((500 - currentPostSize) + " characters left ");
+    $("#postOutput").html(post);
   });
 });
 
